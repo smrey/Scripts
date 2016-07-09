@@ -1,5 +1,8 @@
-#Test string
-amino_acids = 'AABCCDDA'
+#Test string of amino acids to count
+amino_acids = 'AABCCDDAJJJ'
+
+#List of permitted amino acid codes
+amino_acid_valid_list = list('ABCDEFGHIKLMNPQRSTVWXYZ')
 
 #Create count of each residue
 def count_aa(aa):
@@ -16,7 +19,11 @@ def count_aa(aa):
 #Sort the results in the specified order
 def sort_aa(count_dict):
     sorted_keys = sorted(count_dict.keys(), reverse = True)
-    #Possible assert statement on 
+    #Only return counts for valid amino acids
+    for key in sorted_keys:
+        if key not in amino_acid_valid_list:
+            sorted_keys.remove(key)
+    #Print out the results
     for key in sorted_keys:
         print str(key) + " " + str(count_dict.get(key, None))
     return "Counting complete"
